@@ -1,0 +1,13 @@
+.idea
+*.swp
+go.sum
+*/go.sum
+*/main
+*/log/
+*/cache/
+*/conf/*.yml
+*/conf/*.yaml
+*/bin/*
+*/conf/go-*
+logs
+tag
