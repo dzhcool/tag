@@ -11,3 +11,4 @@ go.sum
 */conf/go-*
 logs
 tag
+tag.exe

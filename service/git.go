@@ -115,15 +115,15 @@ func (p *GitSvc) newTag(exists []string) error {
 
 	// 提交 .version文件
 	p.run("git add " + VersionFile)
-	p.run("git commit -m 'update version'")
+	p.run("git commit -m " + tag)
 
-	_, err = p.run(fmt.Sprintf("git tag -a '%s' -m 'update version'", tag))
+	_, err = p.run(fmt.Sprintf(`git tag -a "%s" -m "%s"`, tag))
 	if err != nil {
 		print.Error("create tag failed:" + err.Error())
 		return err
 	}
 
-	_, err = p.run("git push --tags")
+	_, err = p.run("git push origin " + tag)
 	if err != nil {
 		print.Error("push tags failed:" + err.Error())
 		return err

@@ -20,7 +20,7 @@ func usage() {
 	fmt.Println("\t tag -op rc -m 'submit gpstream-888' ")
 	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -tag 'v1.1.1'")
 	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -ext 'rc'")
-	fmt.Println("\t tag -op rd -m -tag 'v1.1.1'")
+	fmt.Println("\t tag -op rd -tag 'v1.1.1'")
 }
 
 func initPrint() {
