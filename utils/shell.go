@@ -19,3 +19,19 @@ func ExecShell(s string) (string, error) {
 	}
 	return out.String(), nil
 }
+
+func PowerShell(args ...string) (string, error) {
+	args = append([]string{"-NoProfile", "-NonInteractive"}, args...)
+	ps, _ := exec.LookPath("powershell.exe")
+	cmd := exec.Command(ps, args...)
+
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+
+	// 启动调用
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+	return out.String(), nil
+}

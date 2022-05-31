@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"runtime"
 	"strings"
 	"tag/config"
 	"tag/print"
@@ -58,7 +59,7 @@ func (p *GitSvc) Release() error {
 	exists := make([]string, 0)
 
 	// 获取全部tag
-	res, err := p.run("git tag --list")
+	res, _ := p.run("git tag --list")
 	if res != "" {
 		buf := strings.Split(res, "\n")
 		offset := 0
@@ -117,7 +118,7 @@ func (p *GitSvc) newTag(exists []string) error {
 	p.run("git add " + VersionFile)
 	p.run("git commit -m " + tag)
 
-	_, err = p.run(fmt.Sprintf(`git tag -a "%s" -m "%s"`, tag))
+	_, err = p.run(fmt.Sprintf(`git tag -a "%s" -m "%s"`, tag, config.NewMemConfig().GetDef("comment", "release")))
 	if err != nil {
 		print.Error("create tag failed:" + err.Error())
 		return err
@@ -208,7 +209,13 @@ func (p *GitSvc) saveTag(filename, tag string) error {
 
 // 执行命令,安全起见，禁止外部访问
 func (p *GitSvc) run(command string) (string, error) {
-	out, err := utils.ExecShell(command)
+	var err error
+	var out string
+	if runtime.GOOS == "windows" {
+		out, err = utils.PowerShell(command + "\n")
+	} else {
+		out, err = utils.ExecShell(command)
+	}
 	if err != nil {
 		return out, err
 	}

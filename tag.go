@@ -17,10 +17,10 @@ func usage() {
 	fmt.Println("\t -ext: version number extra string, ignorable")
 	fmt.Println("\t -tag: specified value")
 	fmt.Println("e.g:")
-	fmt.Println("\t tag -op rc -m 'submit gpstream-888' ")
-	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -tag 'v1.1.1'")
-	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -ext 'rc'")
-	fmt.Println("\t tag -op rd -tag 'v1.1.1'")
+	fmt.Println("\t tag -op rc -m 'submit gpstream-888' //自动升级TAG ")
+	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -tag 'v1.1.1'  //指定TAG ")
+	fmt.Println("\t tag -op rc -m 'submit gpstream-888' -ext 'rc' //定制TAG后缀 ")
+	fmt.Println("\t tag -op rd -tag 'v1.1.1' //删除tag ")
 }
 
 func initPrint() {
